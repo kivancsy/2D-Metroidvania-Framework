@@ -22,9 +22,12 @@ public abstract class PlayerState : EntityState
         base.Update();
     }
 
-    public override void UpdateAnimatonParameters()
+    public override void UpdateAnimationParameters()
     {
-        base.UpdateAnimatonParameters();
+        base.UpdateAnimationParameters();
+        
+        anim.SetFloat("yVelocity", rb.linearVelocity.y);
+        Debug.Log(anim.GetFloat("yVelocity"));
     }
 
     private bool CanDash()

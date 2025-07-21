@@ -10,17 +10,18 @@ public class PlayerIdleState : PlayerGroundedState
     public override void Enter()
     {
         base.Enter();
+
         player.SetVelocity(0, rb.linearVelocity.y);
     }
 
     public override void Update()
     {
         base.Update();
-        
-        if(player.moveInput.x == player.facingDirection && player.wallDetected)
+
+        if (player.moveInput.x == player.facingDirection && player.wallDetected)
             return;
-        
-        if(player.moveInput.x != 0)
+
+        if (player.moveInput.x != 0)
             stateMachine.ChangeState(player.moveState);
     }
 }
