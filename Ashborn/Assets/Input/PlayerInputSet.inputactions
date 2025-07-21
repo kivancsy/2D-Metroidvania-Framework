@@ -1,5 +1,5 @@
 {
-    "name": "PlayerControls",
+    "name": "PlayerInputSet",
     "maps": [
         {
             "name": "New action map",

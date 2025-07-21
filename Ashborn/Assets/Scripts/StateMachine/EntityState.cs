@@ -7,12 +7,12 @@ public abstract class EntityState
     protected string animBoolName;
 
     protected Animator anim;
-    protected Rigidbody rb;
+    protected Rigidbody2D rb;
 
     protected float stateTimer;
     protected bool triggerCalled;
 
-    public EntityState(StateMachine stateMachine, string animBoolName, Animator anim)
+    public EntityState(StateMachine stateMachine, string animBoolName)
     {
         this.stateMachine = stateMachine;
         this.animBoolName = animBoolName;
