@@ -9,6 +9,9 @@ public class Entity : MonoBehaviour
 
     private bool facingRight = true;
     public int facingDirection { get; private set; }
+    public float moveSpeed;
+    [Header("Collision Detection")] public bool groundDetected { get; private set; }
+    public bool wallDetected { get; private set; }
 
     protected virtual void Awake()
     {
@@ -40,7 +43,7 @@ public class Entity : MonoBehaviour
 
     public void HandleFlip(float xVelocity)
     {
-        if (xVelocity > 0 && facingRight!)
+        if (xVelocity > 0 && facingRight == false)
             Flip();
         else if (xVelocity < 0 && facingRight)
             Flip();
