@@ -7,6 +7,12 @@ public class PlayerGroundedState : PlayerState
     {
     }
 
+    public override void Enter()
+    {
+        base.Enter();
+        player.ResetAirDash();
+    }
+
     public override void Update()
     {
         base.Update();
@@ -16,8 +22,8 @@ public class PlayerGroundedState : PlayerState
 
         if (input.Player.Jump.WasPerformedThisFrame())
             stateMachine.ChangeState(player.jumpState);
-        
-        if(input.Player.Roll.WasPerformedThisFrame() && CanRoll())
+
+        if (input.Player.Roll.WasPerformedThisFrame() && CanRoll())
             stateMachine.ChangeState(player.rollState);
     }
 

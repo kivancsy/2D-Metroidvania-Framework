@@ -1,24 +1,23 @@
 using UnityEngine;
 
-public class PlayerRollState : PlayerGroundedState
+public class PlayerAirDashState : PlayerAiredState
 {
     public float originalGravityScale;
-    private int rollDirection;
+    private int dashDirection;
 
-    public PlayerRollState(Player player, StateMachine stateMachine, string animBoolName) : base(player, stateMachine,
-        animBoolName)
+    public PlayerAirDashState(Player player, StateMachine stateMachine, string animBoolName) : base(player,
+        stateMachine, animBoolName)
     {
     }
-
 
     public override void Enter()
     {
         base.Enter();
 
-        player.SetColliderSizeAndOffset(player.rollColliderSize, player.rollColliderOffset);
+        player.UseAirDash();
 
-        rollDirection = player.moveInput.x != 0 ? ((int)player.moveInput.x) : player.facingDirection;
-        stateTimer = player.rollDuration;
+        dashDirection = player.moveInput.x != 0 ? ((int)player.moveInput.x) : player.facingDirection;
+        stateTimer = player.airDashDuration;
 
         originalGravityScale = rb.gravityScale;
         rb.gravityScale = 0;
@@ -27,9 +26,8 @@ public class PlayerRollState : PlayerGroundedState
     public override void Update()
     {
         base.Update();
-        CancelRollIfNeeded();
-        player.SetVelocity(player.rollSpeed * rollDirection, 0);
-
+        CancelAirDashIfNeeded();
+        player.SetVelocity(player.airDashSpeed * dashDirection, 0);
 
         if (stateTimer < 0)
         {
@@ -43,14 +41,11 @@ public class PlayerRollState : PlayerGroundedState
     public override void Exit()
     {
         base.Exit();
-
-        player.ResetCollider();
-
         player.SetVelocity(0, 0);
         rb.gravityScale = originalGravityScale;
     }
 
-    private void CancelRollIfNeeded()
+    private void CancelAirDashIfNeeded()
     {
         if (player.wallDetected)
         {

@@ -11,14 +11,19 @@ public class Player : Entity
     public PlayerJumpState jumpState { get; private set; }
     public PlayerFallState fallState { get; private set; }
     public PlayerRollState rollState { get; private set; }
-    
+    public PlayerAirDashState airDashState { get; private set; }
+
     public Vector2 rollColliderSize = new Vector2(0.5f, 0.5f);
     public Vector2 rollColliderOffset = new Vector2(0f, 0.5f);
-    
+
     [Header("Movement Details")] public float jumpForce;
     [Range(0, 1)] public float inAirMoveMultiplier;
     public float rollDuration = .25f;
     public float rollSpeed = 20;
+    public float airDashDuration = .25f;
+    public float airDashSpeed = 20;
+    public int maxAirDashes = 1;
+    public int currentAirDashCount { get; private set; }
     public Vector2 moveInput { get; private set; }
 
     protected override void Awake()
@@ -32,6 +37,7 @@ public class Player : Entity
         jumpState = new PlayerJumpState(this, stateMachine, "isJump");
         fallState = new PlayerFallState(this, stateMachine, "isJump");
         rollState = new PlayerRollState(this, stateMachine, "isRoll");
+        airDashState = new PlayerAirDashState(this, stateMachine, "isAirDash");
     }
 
     protected override void Start()
@@ -51,5 +57,20 @@ public class Player : Entity
     private void OnDisable()
     {
         input.Disable();
+    }
+
+    public void ResetAirDash()
+    {
+        currentAirDashCount = 0;
+    }
+
+    public void UseAirDash()
+    {
+        currentAirDashCount++;
+    }
+
+    public bool AirDashIsAvailable()
+    {
+        return currentAirDashCount < maxAirDashes;
     }
 }
