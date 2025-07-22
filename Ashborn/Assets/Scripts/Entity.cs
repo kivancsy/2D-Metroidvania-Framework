@@ -5,10 +5,11 @@ public class Entity : MonoBehaviour
 {
     public Animator anim { get; private set; }
     public Rigidbody2D rb { get; private set; }
+    public CapsuleCollider2D capsule { get; private set; }
     public StateMachine stateMachine;
 
     private bool facingRight = true;
-    public int facingDirection { get; private set; }
+    public int facingDirection { get; private set; } = 1;
     public float moveSpeed;
 
     [Header("Collision detection")] [SerializeField]
@@ -19,6 +20,8 @@ public class Entity : MonoBehaviour
     [SerializeField] private Transform groundCheck;
     [SerializeField] private Transform primaryWallCheck;
     [SerializeField] private Transform secondaryWallCheck;
+    public Vector2 originalColliderSize { get; private set; }
+    public Vector2 originalColliderOffset { get; private set; }
     public bool wallDetected { get; private set; }
     public bool groundDetected { get; private set; }
 
@@ -26,6 +29,10 @@ public class Entity : MonoBehaviour
     {
         anim = GetComponentInChildren<Animator>();
         rb = GetComponent<Rigidbody2D>();
+        capsule = GetComponent<CapsuleCollider2D>();
+
+        originalColliderSize = capsule.size;
+        originalColliderOffset = capsule.offset;
 
         stateMachine = new StateMachine();
     }
@@ -64,6 +71,18 @@ public class Entity : MonoBehaviour
         transform.Rotate(0, 180, 0);
         facingRight = !facingRight;
         facingDirection = facingDirection * -1;
+    }
+
+    public void SetColliderSizeAndOffset(Vector2 colliderSize, Vector2 colliderOffset)
+    {
+        if (capsule == null) return;
+        capsule.size = colliderSize;
+        capsule.offset = colliderOffset;
+    }
+
+    public void ResetCollider()
+    {
+        SetColliderSizeAndOffset(originalColliderSize, originalColliderOffset);
     }
 
     private void HandleCollisionDetection()

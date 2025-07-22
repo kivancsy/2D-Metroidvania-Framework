@@ -594,8 +594,12 @@ MonoBehaviour:
   groundCheck: {fileID: 922195386}
   primaryWallCheck: {fileID: 685079332}
   secondaryWallCheck: {fileID: 528358943}
+  rollColliderSize: {x: 0.5, y: 0.7}
+  rollColliderOffset: {x: 0, y: -0.4}
   jumpForce: 10
   inAirMoveMultiplier: 0.7
+  rollDuration: 0.25
+  rollSpeed: 20
 --- !u!50 &922195388
 Rigidbody2D:
   serializedVersion: 5
@@ -612,7 +616,7 @@ Rigidbody2D:
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_GravityScale: 3.5
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: a37a1e8f2b639d1448b748bfdbbf2006, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -633,7 +637,7 @@ CapsuleCollider2D:
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: a37a1e8f2b639d1448b748bfdbbf2006, type: 2}
+  m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -657,8 +661,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: -0.014392495}
-  m_Size: {x: 0.4779036, y: 1.4296818}
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 0.47, y: 1.43}
   m_Direction: 0
 --- !u!1 &1646320413
 GameObject:
