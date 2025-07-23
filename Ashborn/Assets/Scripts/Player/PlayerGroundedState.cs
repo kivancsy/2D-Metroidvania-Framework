@@ -25,6 +25,9 @@ public class PlayerGroundedState : PlayerState
 
         if (input.Player.Roll.WasPerformedThisFrame() && CanRoll())
             stateMachine.ChangeState(player.rollState);
+
+        if (input.Player.Attack.WasPerformedThisFrame())
+            stateMachine.ChangeState(player.basicAttackState);
     }
 
     private bool CanRoll()

@@ -11,7 +11,6 @@ public class PlayerJumpState : PlayerAiredState
     {
         base.Enter();
         player.SetVelocity(rb.linearVelocity.x, player.jumpForce);
-        Debug.Log(rb.linearVelocity.x);
     }
 
     public override void Update()

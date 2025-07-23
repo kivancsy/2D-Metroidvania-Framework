@@ -596,6 +596,13 @@ MonoBehaviour:
   secondaryWallCheck: {fileID: 528358943}
   rollColliderSize: {x: 0.5, y: 0.5}
   rollColliderOffset: {x: 0, y: -0.8}
+  attackVelocity:
+  - {x: 5, y: 1}
+  - {x: 1, y: 1}
+  - {x: 7, y: 1}
+  jumpAttackVelocity: {x: 0, y: 0}
+  attackVelocityDuration: 0.1
+  comboResetTime: 1
   jumpForce: 11
   inAirMoveMultiplier: 0.7
   rollDuration: 0.25
@@ -946,6 +953,7 @@ GameObject:
   - component: {fileID: 1646320414}
   - component: {fileID: 1646320415}
   - component: {fileID: 1646320416}
+  - component: {fileID: 1646320417}
   m_Layer: 0
   m_Name: Animator
   m_TagString: Untagged
@@ -1045,6 +1053,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1646320417
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1646320413}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6596609ad05f97246aa1caf3becfd6f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1858109354
 GameObject:
   m_ObjectHideFlags: 0
