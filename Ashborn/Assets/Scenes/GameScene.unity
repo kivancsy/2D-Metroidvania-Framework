@@ -281,7 +281,7 @@ Transform:
   m_GameObject: {fileID: 528358942}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.39, z: 0}
+  m_LocalPosition: {x: 0, y: -0.646, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -396,7 +396,7 @@ Transform:
   m_GameObject: {fileID: 685079331}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.48, z: 0}
+  m_LocalPosition: {x: 0, y: 0.297, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -564,7 +564,7 @@ Transform:
   m_GameObject: {fileID: 922195385}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.01, y: 0.155, z: 0}
+  m_LocalPosition: {x: 0, y: 0.45, z: 0}
   m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -589,19 +589,20 @@ MonoBehaviour:
   whatIsGround:
     serializedVersion: 2
     m_Bits: 8
-  groundCheckDistance: 0.9
-  wallCheckDistance: 0.73
+  groundCheckDistance: 1.21
+  wallCheckDistance: 0.3
   groundCheck: {fileID: 922195386}
   primaryWallCheck: {fileID: 685079332}
   secondaryWallCheck: {fileID: 528358943}
-  rollColliderSize: {x: 0.5, y: 0.7}
-  rollColliderOffset: {x: 0, y: -0.4}
-  jumpForce: 10
+  rollColliderSize: {x: 0.5, y: 0.5}
+  rollColliderOffset: {x: 0, y: -0.8}
+  jumpForce: 11
   inAirMoveMultiplier: 0.7
   rollDuration: 0.25
   rollSpeed: 20
   airDashDuration: 0.25
-  airDashSpeed: 20
+  airDashSpeed: 15
+  maxAirDashes: 1
 --- !u!50 &922195388
 Rigidbody2D:
   serializedVersion: 5
@@ -663,8 +664,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.47, y: 1.43}
+  m_Offset: {x: -0.006775806, y: -0.2895826}
+  m_Size: {x: 0.3605539, y: 1.4163251}
   m_Direction: 0
 --- !u!1 &1186701503
 GameObject:
@@ -961,7 +962,7 @@ Transform:
   m_GameObject: {fileID: 1646320413}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.094, y: 0, z: 0}
+  m_LocalPosition: {x: -0.05, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1011,7 +1012,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 4723107735738678597, guid: e398f08fbeb8c9d45999aa6c6f807bbc, type: 3}
+  m_Sprite: {fileID: 4723107735738678597, guid: ace8c713bd99c2a4e82df0a69437547f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
