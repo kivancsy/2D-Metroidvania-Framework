@@ -19,6 +19,9 @@ public class PlayerAiredState : PlayerState
         {
             stateMachine.ChangeState(player.airDashState);
         }
+
+        if (input.Player.Attack.WasPressedThisFrame() && stateMachine.currentState != player.airDashState)
+            stateMachine.ChangeState(player.jumpattackState);
     }
 
     private bool CanAirDash()

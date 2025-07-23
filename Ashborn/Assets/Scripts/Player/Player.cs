@@ -14,6 +14,7 @@ public class Player : Entity
     public PlayerRollState rollState { get; private set; }
     public PlayerAirDashState airDashState { get; private set; }
     public PlayerBasicAttackState basicAttackState { get; private set; }
+    public PlayerJumpAttackState jumpattackState { get; private set; }
 
     public Vector2 rollColliderSize = new Vector2(0.5f, 0.5f);
     public Vector2 rollColliderOffset = new Vector2(0f, 0.5f);
@@ -47,6 +48,7 @@ public class Player : Entity
         rollState = new PlayerRollState(this, stateMachine, "isRoll");
         airDashState = new PlayerAirDashState(this, stateMachine, "isAirDash");
         basicAttackState = new PlayerBasicAttackState(this, stateMachine, "isBasicAttack");
+        jumpattackState = new PlayerJumpAttackState(this, stateMachine, "isJumpAttack");
     }
 
     protected override void Start()
