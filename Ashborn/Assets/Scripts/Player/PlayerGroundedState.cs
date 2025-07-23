@@ -17,7 +17,7 @@ public class PlayerGroundedState : PlayerState
     {
         base.Update();
 
-        if (rb.linearVelocity.y < 0 && player.groundDetected == false)
+        if (rb.linearVelocity.y < 0 && player.isGroundDetected == false)
             stateMachine.ChangeState(player.fallState);
 
         if (input.Player.Jump.WasPerformedThisFrame())
@@ -32,7 +32,7 @@ public class PlayerGroundedState : PlayerState
 
     private bool CanRoll()
     {
-        if (player.wallDetected)
+        if (player.isWallDetected)
             return false;
 
         if (stateMachine.currentState == player.rollState)

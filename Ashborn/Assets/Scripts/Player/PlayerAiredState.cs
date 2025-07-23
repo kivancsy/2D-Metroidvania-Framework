@@ -20,16 +20,30 @@ public class PlayerAiredState : PlayerState
             stateMachine.ChangeState(player.airDashState);
         }
 
-        if (input.Player.Attack.WasPressedThisFrame() && stateMachine.currentState != player.airDashState)
+        if (input.Player.Attack.WasPressedThisFrame() && CanJumpAttack())
             stateMachine.ChangeState(player.jumpattackState);
     }
 
     private bool CanAirDash()
     {
-        if (player.wallDetected)
+        if (player.isWallDetected)
             return false;
 
+        if (player.isLedgeGrab)
+            return false;
+
+        if (stateMachine.currentState == player.airDashState && stateMachine.currentState != player.ledgeGrabState)
+            return false;
+
+        return true;
+    }
+
+    private bool CanJumpAttack()
+    {
         if (stateMachine.currentState == player.airDashState)
+            return false;
+
+        if (stateMachine.currentState == player.ledgeGrabState)
             return false;
 
         return true;

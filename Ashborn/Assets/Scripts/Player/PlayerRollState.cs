@@ -20,8 +20,7 @@ public class PlayerRollState : PlayerGroundedState
         rollDirection = player.moveInput.x != 0 ? ((int)player.moveInput.x) : player.facingDirection;
         stateTimer = player.rollDuration;
 
-        originalGravityScale = rb.gravityScale;
-        rb.gravityScale = 0;
+        player.DisableGravity();
     }
 
     public override void Update()
@@ -33,7 +32,7 @@ public class PlayerRollState : PlayerGroundedState
 
         if (stateTimer < 0)
         {
-            if (player.groundDetected)
+            if (player.isGroundDetected)
                 stateMachine.ChangeState(player.idleState);
             else
                 stateMachine.ChangeState(player.fallState);
@@ -46,15 +45,15 @@ public class PlayerRollState : PlayerGroundedState
 
         player.ResetCollider();
 
+        player.EnableGravity();
         player.SetVelocity(0, 0);
-        rb.gravityScale = originalGravityScale;
     }
 
     private void CancelRollIfNeeded()
     {
-        if (player.wallDetected)
+        if (player.isWallDetected)
         {
-            if (player.groundDetected)
+            if (player.isGroundDetected)
                 stateMachine.ChangeState(player.idleState);
             else
                 stateMachine.ChangeState(player.fallState);

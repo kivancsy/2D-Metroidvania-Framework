@@ -15,9 +15,17 @@ public class Player : Entity
     public PlayerAirDashState airDashState { get; private set; }
     public PlayerBasicAttackState basicAttackState { get; private set; }
     public PlayerJumpAttackState jumpattackState { get; private set; }
+    public PlayerLedgeGrabState ledgeGrabState { get; private set; }
 
+    [Header("Player Specific Collision Detection")]
     public Vector2 rollColliderSize = new Vector2(0.5f, 0.5f);
+
     public Vector2 rollColliderOffset = new Vector2(0f, 0.5f);
+    [SerializeField] private float ledgeGrabDistance;
+    [SerializeField] private Transform primaryLedgeGrabCheck;
+    [SerializeField] private Transform secondaryLedgeGrabCheck;
+    public bool isLedgeGrab { get; private set; }
+
 
     [Header("Attack Details")] public Vector2[] attackVelocity;
     public Vector2 jumpAttackVelocity;
@@ -49,12 +57,19 @@ public class Player : Entity
         airDashState = new PlayerAirDashState(this, stateMachine, "isAirDash");
         basicAttackState = new PlayerBasicAttackState(this, stateMachine, "isBasicAttack");
         jumpattackState = new PlayerJumpAttackState(this, stateMachine, "isJumpAttack");
+        ledgeGrabState = new PlayerLedgeGrabState(this, stateMachine, "isLedgeGrab");
     }
 
     protected override void Start()
     {
         base.Start();
         stateMachine.Initialize(idleState);
+    }
+
+    protected override void Update()
+    {
+        base.Update();
+        HandleLedgeGrabCollision();
     }
 
     private void OnEnable()
@@ -97,5 +112,25 @@ public class Player : Entity
     {
         yield return new WaitForEndOfFrame();
         stateMachine.ChangeState(basicAttackState);
+    }
+
+    private void HandleLedgeGrabCollision()
+    {
+        isLedgeGrab = Physics2D.Raycast(primaryLedgeGrabCheck.position, Vector2.right * facingDirection,
+            ledgeGrabDistance,
+            whatIsGround) && Physics2D.Raycast(secondaryLedgeGrabCheck.position, Vector2.right * facingDirection,
+            ledgeGrabDistance,
+            whatIsGround);
+    }
+
+    protected override void DrawGizmos()
+    {
+        base.DrawGizmos();
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawLine(primaryLedgeGrabCheck.position,
+            primaryLedgeGrabCheck.position + new Vector3(ledgeGrabDistance * facingDirection, 0));
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawLine(secondaryLedgeGrabCheck.position,
+            secondaryLedgeGrabCheck.position + new Vector3(ledgeGrabDistance * facingDirection, 0));
     }
 }

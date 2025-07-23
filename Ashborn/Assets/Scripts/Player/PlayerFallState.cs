@@ -11,7 +11,10 @@ public class PlayerFallState : PlayerAiredState
     {
         base.Update();
 
-        if (player.groundDetected)
+        if (player.isGroundDetected)
             stateMachine.ChangeState(player.idleState);
+
+        if (player.isLedgeGrab && !player.isWallDetected)
+            stateMachine.ChangeState(player.ledgeGrabState);
     }
 }

@@ -22,14 +22,14 @@ public class PlayerJumpAttackState : PlayerState
     {
         base.Update();
 
-        if (player.groundDetected && touchedGround == false)
+        if (player.isGroundDetected && touchedGround == false)
         {
             touchedGround = true;
             anim.SetTrigger("jumpAttackTrigger");
             player.SetVelocity(0, rb.linearVelocity.y);
         }
 
-        if (triggerCalled && player.groundDetected)
+        if (triggerCalled && player.isGroundDetected)
         {
             stateMachine.ChangeState(player.idleState);
         }

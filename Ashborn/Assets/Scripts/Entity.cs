@@ -22,8 +22,9 @@ public class Entity : MonoBehaviour
     [SerializeField] private Transform secondaryWallCheck;
     public Vector2 originalColliderSize { get; private set; }
     public Vector2 originalColliderOffset { get; private set; }
-    public bool wallDetected { get; private set; }
-    public bool groundDetected { get; private set; }
+    public float defaultGravityScale { get; private set; }
+    public bool isWallDetected { get; private set; }
+    public bool isGroundDetected { get; private set; }
 
     protected virtual void Awake()
     {
@@ -31,6 +32,7 @@ public class Entity : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         capsule = GetComponent<CapsuleCollider2D>();
 
+        defaultGravityScale = rb.gravityScale;
         originalColliderSize = capsule.size;
         originalColliderOffset = capsule.offset;
 
@@ -66,11 +68,21 @@ public class Entity : MonoBehaviour
             Flip();
     }
 
-    private void Flip()
+    public void Flip()
     {
         transform.Rotate(0, 180, 0);
         facingRight = !facingRight;
         facingDirection = facingDirection * -1;
+    }
+
+    public void DisableGravity()
+    {
+        rb.gravityScale = 0;
+    }
+
+    public void EnableGravity()
+    {
+        rb.gravityScale = defaultGravityScale;
     }
 
     public void SetColliderSizeAndOffset(Vector2 colliderSize, Vector2 colliderOffset)
@@ -87,24 +99,29 @@ public class Entity : MonoBehaviour
 
     private void HandleCollisionDetection()
     {
-        groundDetected = Physics2D.Raycast(groundCheck.position, Vector2.down, groundCheckDistance, whatIsGround);
+        isGroundDetected = Physics2D.Raycast(groundCheck.position, Vector2.down, groundCheckDistance, whatIsGround);
 
 
         if (secondaryWallCheck != null)
         {
-            wallDetected = Physics2D.Raycast(primaryWallCheck.position, Vector2.right * facingDirection,
-                               wallCheckDistance,
-                               whatIsGround)
-                           && Physics2D.Raycast(secondaryWallCheck.position, Vector2.right * facingDirection,
-                               wallCheckDistance, whatIsGround);
+            isWallDetected = Physics2D.Raycast(primaryWallCheck.position, Vector2.right * facingDirection,
+                                 wallCheckDistance,
+                                 whatIsGround)
+                             && Physics2D.Raycast(secondaryWallCheck.position, Vector2.right * facingDirection,
+                                 wallCheckDistance, whatIsGround);
         }
         else
-            wallDetected = Physics2D.Raycast(primaryWallCheck.position, Vector2.right * facingDirection,
+            isWallDetected = Physics2D.Raycast(primaryWallCheck.position, Vector2.right * facingDirection,
                 wallCheckDistance,
                 whatIsGround);
     }
 
     protected virtual void OnDrawGizmos()
+    {
+        DrawGizmos();
+    }
+
+    protected virtual void DrawGizmos()
     {
         Gizmos.DrawLine(groundCheck.position, groundCheck.position + new Vector3(0, -groundCheckDistance));
         Gizmos.DrawLine(primaryWallCheck.position,
