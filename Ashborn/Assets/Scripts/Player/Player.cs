@@ -22,9 +22,13 @@ public class Player : Entity
 
     public Vector2 rollColliderOffset = new Vector2(0f, 0.5f);
     [SerializeField] private float ledgeGrabDistance;
-    [SerializeField] private Transform primaryLedgeGrabCheck;
-    [SerializeField] private Transform secondaryLedgeGrabCheck;
+    [SerializeField] private float ledgeClearDistance;
+    [SerializeField] private Transform ledgeGrabFrontCheck;
+    [SerializeField] private Transform ledgeGrabAboveCheck;
+    [SerializeField] private Transform ledgeClearCheck;
     public bool isLedgeGrab { get; private set; }
+    public bool isLedgeGrabAboveClear { get; private set; }
+    public bool isLedgeClear { get; private set; }
 
 
     [Header("Attack Details")] public Vector2[] attackVelocity;
@@ -123,21 +127,45 @@ public class Player : Entity
 
     private void HandleLedgeGrabCollision()
     {
-        isLedgeGrab = Physics2D.Raycast(primaryLedgeGrabCheck.position, Vector2.right * facingDirection,
-            ledgeGrabDistance,
-            whatIsGround) && Physics2D.Raycast(secondaryLedgeGrabCheck.position, Vector2.right * facingDirection,
+        isLedgeGrab = Physics2D.Raycast(ledgeGrabFrontCheck.position, Vector2.right * facingDirection,
             ledgeGrabDistance,
             whatIsGround);
+
+        isLedgeGrabAboveClear = !Physics2D.Raycast(ledgeGrabAboveCheck.position, Vector2.right * facingDirection,
+            ledgeGrabDistance, whatIsGround);
+
+        isLedgeClear = Physics2D.Raycast(ledgeClearCheck.position, Vector2.up,
+            ledgeClearDistance,
+            whatIsGround);
+    }
+
+    public bool CanGrabLedge()
+    {
+        return isLedgeGrab && isLedgeGrabAboveClear;
     }
 
     protected override void DrawGizmos()
     {
         base.DrawGizmos();
-        Gizmos.color = Color.cyan;
-        Gizmos.DrawLine(primaryLedgeGrabCheck.position,
-            primaryLedgeGrabCheck.position + new Vector3(ledgeGrabDistance * facingDirection, 0));
-        Gizmos.color = Color.cyan;
-        Gizmos.DrawLine(secondaryLedgeGrabCheck.position,
-            secondaryLedgeGrabCheck.position + new Vector3(ledgeGrabDistance * facingDirection, 0));
+        if (ledgeGrabAboveCheck != null)
+        {
+            Gizmos.color = Color.cyan;
+            Gizmos.DrawLine(ledgeGrabFrontCheck.position,
+                ledgeGrabFrontCheck.position + new Vector3(ledgeGrabDistance * facingDirection, 0));
+            Gizmos.color = Color.magenta;
+            Gizmos.DrawLine(ledgeGrabAboveCheck.position,
+                ledgeGrabAboveCheck.position + new Vector3(ledgeGrabDistance * facingDirection, 0));
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawLine(ledgeClearCheck.position,
+                ledgeClearCheck.position + new Vector3(0, ledgeClearDistance));
+        }
+        else
+        {
+            Gizmos.color = Color.cyan;
+            Gizmos.DrawLine(ledgeGrabFrontCheck.position,
+                ledgeGrabFrontCheck.position + new Vector3(ledgeGrabDistance * facingDirection, 0));
+        }
     }
 }
+//0.673
+//0.875

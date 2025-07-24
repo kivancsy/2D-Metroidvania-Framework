@@ -7,6 +7,12 @@ public class PlayerFallState : PlayerAiredState
     {
     }
 
+    public override void Enter()
+    {
+        base.Enter();
+        player.IncreaseGravity();
+    }
+
     public override void Update()
     {
         base.Update();
@@ -14,7 +20,7 @@ public class PlayerFallState : PlayerAiredState
         if (player.isGroundDetected)
             stateMachine.ChangeState(player.idleState);
 
-        if (player.isLedgeGrab && !player.isWallDetected)
+        if (player.CanGrabLedge())
             stateMachine.ChangeState(player.ledgeGrabState);
     }
 }

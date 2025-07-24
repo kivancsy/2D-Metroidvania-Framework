@@ -144,7 +144,7 @@ Transform:
   m_GameObject: {fileID: 284236313}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.4, z: 0}
+  m_LocalPosition: {x: 0, y: 0.875, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -604,6 +604,7 @@ Transform:
   - {fileID: 528358943}
   - {fileID: 1551622361}
   - {fileID: 284236314}
+  - {fileID: 2090027035}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &922195387
@@ -629,9 +630,11 @@ MonoBehaviour:
   secondaryWallCheck: {fileID: 0}
   rollColliderSize: {x: 0.5, y: 0.5}
   rollColliderOffset: {x: 0, y: -0.5}
-  ledgeGrabDistance: 0.25
-  primaryLedgeGrabCheck: {fileID: 1551622361}
-  secondaryLedgeGrabCheck: {fileID: 284236314}
+  ledgeGrabDistance: 0.3
+  ledgeClearDistance: 0.5
+  ledgeGrabFrontCheck: {fileID: 1551622361}
+  ledgeGrabAboveCheck: {fileID: 284236314}
+  ledgeClearCheck: {fileID: 2090027035}
   attackVelocity:
   - {x: 5, y: 1}
   - {x: 1, y: 1}
@@ -639,8 +642,8 @@ MonoBehaviour:
   jumpAttackVelocity: {x: 2, y: 5}
   attackVelocityDuration: 0.1
   comboResetTime: 1
-  jumpForce: 11
-  inAirMoveMultiplier: 0.7
+  jumpForce: 13
+  inAirMoveMultiplier: 1
   rollDuration: 0.25
   rollSpeed: 20
   airDashDuration: 0.25
@@ -1107,7 +1110,7 @@ Transform:
   m_GameObject: {fileID: 1488648804}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.748, y: 1.36, z: 0}
+  m_LocalPosition: {x: 5.748, y: 3.36, z: 0}
   m_LocalScale: {x: 4.50965, y: 0.4875, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1138,7 +1141,7 @@ Transform:
   m_GameObject: {fileID: 1551622360}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.607, z: 0}
+  m_LocalPosition: {x: 0, y: 0.673, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1395,12 +1398,43 @@ Transform:
   m_GameObject: {fileID: 1858109354}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: -6.93, y: 0.01, z: 0}
-  m_LocalScale: {x: 1.565402, y: 2.5183918, z: 1.3612928}
+  m_LocalPosition: {x: -5.67, y: 1.21, z: 0}
+  m_LocalScale: {x: 3.9829457, y: 4.9670243, z: 2.6848779}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+--- !u!1 &2090027034
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2090027035}
+  m_Layer: 0
+  m_Name: Ledge Clear Check
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2090027035
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2090027034}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.401, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 922195386}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

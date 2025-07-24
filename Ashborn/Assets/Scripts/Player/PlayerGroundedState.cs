@@ -11,6 +11,7 @@ public class PlayerGroundedState : PlayerState
     {
         base.Enter();
         player.ResetAirDash();
+        player.EnableGravity();
     }
 
     public override void Update()

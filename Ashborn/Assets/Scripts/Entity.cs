@@ -85,6 +85,11 @@ public class Entity : MonoBehaviour
         rb.gravityScale = defaultGravityScale;
     }
 
+    public void IncreaseGravity()
+    {
+        rb.gravityScale += rb.gravityScale;
+    }
+
     public void SetColliderSizeAndOffset(Vector2 colliderSize, Vector2 colliderOffset)
     {
         if (capsule == null) return;
