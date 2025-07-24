@@ -28,9 +28,4 @@ public abstract class PlayerState : EntityState
 
         anim.SetFloat("yVelocity", rb.linearVelocity.y);
     }
-
-    private bool CanDash()
-    {
-        return true;
-    }
 }

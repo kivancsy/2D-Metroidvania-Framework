@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerLedgeGrabState : PlayerAiredState
+public class PlayerLedgeGrabState : PlayerState
 {
     public PlayerLedgeGrabState(Player player, StateMachine stateMachine, string animBoolName) : base(player,
         stateMachine, animBoolName)
@@ -41,9 +41,15 @@ public class PlayerLedgeGrabState : PlayerAiredState
             return;
         }
 
-        if (Mathf.Approximately(player.moveInput.y, -player.facingDirection))
+        if (player.moveInput.y == -1)
         {
-            player.Flip();
+            stateMachine.ChangeState(player.fallState);
+            player.DoLedgeDropPushBack();
+            return;
+        }
+
+        if (player.moveInput.x != 0 && player.moveInput.x != player.facingDirection)
+        {
             stateMachine.ChangeState(player.fallState);
             return;
         }

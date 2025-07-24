@@ -40,6 +40,7 @@ public class Player : Entity
     public float airDashDuration = .25f;
     public float airDashSpeed = 20;
     public int maxAirDashes = 1;
+    public float ledgeDropPushBackAmount = 0.5f;
     public int currentAirDashCount { get; private set; }
     public Vector2 moveInput { get; private set; }
 
@@ -98,6 +99,12 @@ public class Player : Entity
     public bool AirDashIsAvailable()
     {
         return currentAirDashCount < maxAirDashes;
+    }
+
+    public void DoLedgeDropPushBack()
+    {
+        Vector2 pushBackDir = new Vector2(-facingDirection, 0);
+        transform.position += (Vector3)(pushBackDir * ledgeDropPushBackAmount);
     }
 
     public void EnterAttackStateWithDelay()

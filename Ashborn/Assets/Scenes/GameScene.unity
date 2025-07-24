@@ -646,6 +646,7 @@ MonoBehaviour:
   airDashDuration: 0.25
   airDashSpeed: 15
   maxAirDashes: 1
+  ledgeDropPushBackAmount: 0.5
 --- !u!50 &922195388
 Rigidbody2D:
   serializedVersion: 5
