@@ -129,7 +129,7 @@ GameObject:
   m_Component:
   - component: {fileID: 284236314}
   m_Layer: 0
-  m_Name: Secondary Ledge Grab Check
+  m_Name: Ledge Grab Above Check
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -144,7 +144,7 @@ Transform:
   m_GameObject: {fileID: 284236313}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.875, z: 0}
+  m_LocalPosition: {x: 0, y: 0.906, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -561,7 +561,7 @@ Transform:
   m_GameObject: {fileID: 787476458}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.071, y: -1.25, z: 0}
+  m_LocalPosition: {x: 0.071, y: -4.56, z: 0}
   m_LocalScale: {x: 18.988, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -595,7 +595,7 @@ Transform:
   m_GameObject: {fileID: 922195385}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.45, z: 0}
+  m_LocalPosition: {x: 0, y: -2.86, z: 0}
   m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -629,9 +629,11 @@ MonoBehaviour:
   primaryWallCheck: {fileID: 685079332}
   secondaryWallCheck: {fileID: 0}
   rollColliderSize: {x: 0.5, y: 0.5}
-  rollColliderOffset: {x: 0, y: -0.5}
+  rollColliderOffset: {x: -0.006775806, y: -0.2895826}
+  ledgeJumpColliderSize: {x: 0.3, y: 0.5}
+  ledgeJumpColliderOffset: {x: 0, y: 0}
   ledgeGrabDistance: 0.3
-  ledgeClearDistance: 0.5
+  ledgeClearDistance: 0.7
   ledgeGrabFrontCheck: {fileID: 1551622361}
   ledgeGrabAboveCheck: {fileID: 284236314}
   ledgeClearCheck: {fileID: 2090027035}
@@ -650,6 +652,7 @@ MonoBehaviour:
   airDashSpeed: 15
   maxAirDashes: 1
   ledgeDropPushBackAmount: 0.5
+  ledgeJumpForce: {x: 0, y: 13}
 --- !u!50 &922195388
 Rigidbody2D:
   serializedVersion: 5
@@ -842,7 +845,7 @@ Transform:
   m_GameObject: {fileID: 1186701503}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: -8.65, y: 1.39, z: 0}
+  m_LocalPosition: {x: -8.65, y: -1.92, z: 0}
   m_LocalScale: {x: 18.988, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -976,7 +979,7 @@ Transform:
   m_GameObject: {fileID: 1276827783}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 8.5, y: 1.39, z: 0}
+  m_LocalPosition: {x: 8.5, y: -1.92, z: 0}
   m_LocalScale: {x: 18.988, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1110,7 +1113,7 @@ Transform:
   m_GameObject: {fileID: 1488648804}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.748, y: 3.36, z: 0}
+  m_LocalPosition: {x: 5.748, y: -0.482, z: 0}
   m_LocalScale: {x: 4.50965, y: 0.4875, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1126,7 +1129,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1551622361}
   m_Layer: 0
-  m_Name: Primary Ledge Grab Check
+  m_Name: Ledge Grab Front Check
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1398,7 +1401,7 @@ Transform:
   m_GameObject: {fileID: 1858109354}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: -5.67, y: 1.21, z: 0}
+  m_LocalPosition: {x: -5.67, y: -2.1, z: 0}
   m_LocalScale: {x: 3.9829457, y: 4.9670243, z: 2.6848779}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1429,7 +1432,7 @@ Transform:
   m_GameObject: {fileID: 2090027034}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.401, z: 0}
+  m_LocalPosition: {x: 0.135, y: 0.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

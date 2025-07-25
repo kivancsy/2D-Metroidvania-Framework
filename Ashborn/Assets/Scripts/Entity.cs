@@ -10,7 +10,8 @@ public class Entity : MonoBehaviour
 
     private bool facingRight = true;
     public int facingDirection { get; private set; } = 1;
-    public float moveSpeed;
+
+    [Header("Movement Details")] public float moveSpeed;
 
     [Header("Collision detection")] [SerializeField]
     protected LayerMask whatIsGround;

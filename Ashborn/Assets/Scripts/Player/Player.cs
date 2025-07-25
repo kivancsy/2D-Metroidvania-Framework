@@ -16,11 +16,14 @@ public class Player : Entity
     public PlayerBasicAttackState basicAttackState { get; private set; }
     public PlayerJumpAttackState jumpattackState { get; private set; }
     public PlayerLedgeGrabState ledgeGrabState { get; private set; }
+    public PlayerLedgeJumpState ledgeJumpState { get; private set; }
 
     [Header("Player Specific Collision Detection")]
     public Vector2 rollColliderSize = new Vector2(0.5f, 0.5f);
 
     public Vector2 rollColliderOffset = new Vector2(0f, 0.5f);
+    public Vector2 ledgeJumpColliderSize = new Vector2(0.5f, 0.5f);
+    public Vector2 ledgeJumpColliderOffset = new Vector2(0.5f, 0.5f);
     [SerializeField] private float ledgeGrabDistance;
     [SerializeField] private float ledgeClearDistance;
     [SerializeField] private Transform ledgeGrabFrontCheck;
@@ -31,13 +34,13 @@ public class Player : Entity
     public bool isLedgeClear { get; private set; }
 
 
-    [Header("Attack Details")] public Vector2[] attackVelocity;
+    [Header("Player Attack Details")] public Vector2[] attackVelocity;
     public Vector2 jumpAttackVelocity;
     public float attackVelocityDuration = .1f;
     public float comboResetTime = 1;
     private Coroutine queuedAttackCo;
 
-    [Header("Movement Details")] public float jumpForce;
+    [Header("Player Movement Details")] public float jumpForce;
     [Range(0, 1)] public float inAirMoveMultiplier;
     public float rollDuration = .25f;
     public float rollSpeed = 20;
@@ -45,6 +48,7 @@ public class Player : Entity
     public float airDashSpeed = 20;
     public int maxAirDashes = 1;
     public float ledgeDropPushBackAmount = 0.5f;
+    public Vector2 ledgeJumpForce;
     public int currentAirDashCount { get; private set; }
     public Vector2 moveInput { get; private set; }
 
@@ -63,6 +67,7 @@ public class Player : Entity
         basicAttackState = new PlayerBasicAttackState(this, stateMachine, "isBasicAttack");
         jumpattackState = new PlayerJumpAttackState(this, stateMachine, "isJumpAttack");
         ledgeGrabState = new PlayerLedgeGrabState(this, stateMachine, "isLedgeGrab");
+        ledgeJumpState = new PlayerLedgeJumpState(this, stateMachine, "isLedgeJump");
     }
 
     protected override void Start()
@@ -134,14 +139,14 @@ public class Player : Entity
         isLedgeGrabAboveClear = !Physics2D.Raycast(ledgeGrabAboveCheck.position, Vector2.right * facingDirection,
             ledgeGrabDistance, whatIsGround);
 
-        isLedgeClear = Physics2D.Raycast(ledgeClearCheck.position, Vector2.up,
+        isLedgeClear = !Physics2D.Raycast(ledgeClearCheck.position, Vector2.up,
             ledgeClearDistance,
             whatIsGround);
     }
 
     public bool CanGrabLedge()
     {
-        return isLedgeGrab && isLedgeGrabAboveClear;
+        return isLedgeGrab && isLedgeGrabAboveClear && isLedgeClear;
     }
 
     protected override void DrawGizmos()

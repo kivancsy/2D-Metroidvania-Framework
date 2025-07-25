@@ -11,6 +11,7 @@ public class PlayerLedgeGrabState : PlayerState
     {
         base.Enter();
         player.SetVelocity(0, 0);
+        player.ResetAirDash();
         player.DisableGravity();
     }
 
@@ -18,6 +19,9 @@ public class PlayerLedgeGrabState : PlayerState
     {
         base.Update();
         HandleLedgeGrab();
+
+        if (input.Player.Jump.WasPressedThisFrame())
+            stateMachine.ChangeState(player.ledgeJumpState);
     }
 
     public override void Exit()
@@ -48,11 +52,11 @@ public class PlayerLedgeGrabState : PlayerState
             return;
         }
 
-        if (player.moveInput.x != 0 && player.moveInput.x != player.facingDirection)
-        {
-            stateMachine.ChangeState(player.fallState);
-            return;
-        }
+        // if (player.moveInput.x != 0 && player.moveInput.x != player.facingDirection)
+        // {
+        //     stateMachine.ChangeState(player.fallState);
+        //     return;
+        // }
 
         player.SetVelocity(0, 0);
     }
