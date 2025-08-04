@@ -17,6 +17,7 @@ public class Player : Entity
     public PlayerJumpAttackState jumpattackState { get; private set; }
     public PlayerLedgeGrabState ledgeGrabState { get; private set; }
     public PlayerLedgeJumpState ledgeJumpState { get; private set; }
+    public PlayerSlideState slideState { get; private set; }
 
     [Header("Player Specific Collision Detection")]
     public Vector2 rollColliderSize = new Vector2(0.5f, 0.5f);
@@ -24,6 +25,8 @@ public class Player : Entity
     public Vector2 rollColliderOffset = new Vector2(0f, 0.5f);
     public Vector2 ledgeJumpColliderSize = new Vector2(0.5f, 0.5f);
     public Vector2 ledgeJumpColliderOffset = new Vector2(0.5f, 0.5f);
+    public Vector2 slideColliderSize = new Vector2(0.5f, 0.5f);
+    public Vector2 slideColliderOffset = new Vector2(0f, 0.5f);
     [SerializeField] private float ledgeGrabDistance;
     [SerializeField] private float ledgeClearDistance;
     [SerializeField] private Transform ledgeGrabFrontCheck;
@@ -49,6 +52,8 @@ public class Player : Entity
     public int maxAirDashes = 1;
     public float ledgeDropPushBackAmount = 0.5f;
     public Vector2 ledgeJumpForce;
+    public float slideDuration = .25f;
+    public float slideSpeed = 12;
     public int currentAirDashCount { get; private set; }
     public Vector2 moveInput { get; private set; }
 
@@ -68,6 +73,7 @@ public class Player : Entity
         jumpattackState = new PlayerJumpAttackState(this, stateMachine, "isJumpAttack");
         ledgeGrabState = new PlayerLedgeGrabState(this, stateMachine, "isLedgeGrab");
         ledgeJumpState = new PlayerLedgeJumpState(this, stateMachine, "isLedgeJump");
+        slideState = new PlayerSlideState(this, stateMachine, "isSlide");
     }
 
     protected override void Start()
@@ -132,9 +138,9 @@ public class Player : Entity
 
     private void HandleLedgeGrabCollision()
     {
-        isLedgeGrab = Physics2D.Raycast(ledgeGrabFrontCheck.position, Vector2.right * facingDirection,
-            ledgeGrabDistance,
-            whatIsGround);
+        isLedgeGrab =
+            Physics2D.Raycast(ledgeGrabFrontCheck.position, Vector2.right * facingDirection,
+                ledgeGrabDistance, whatIsGround);
 
         isLedgeGrabAboveClear = !Physics2D.Raycast(ledgeGrabAboveCheck.position, Vector2.right * facingDirection,
             ledgeGrabDistance, whatIsGround);

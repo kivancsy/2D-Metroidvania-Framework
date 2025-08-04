@@ -29,6 +29,9 @@ public class PlayerGroundedState : PlayerState
 
         if (input.Player.Attack.WasPerformedThisFrame())
             stateMachine.ChangeState(player.basicAttackState);
+
+        if (input.Player.Slide.WasPerformedThisFrame() && CanSlide())
+            stateMachine.ChangeState(player.slideState);
     }
 
     private bool CanRoll()
@@ -37,6 +40,20 @@ public class PlayerGroundedState : PlayerState
             return false;
 
         if (stateMachine.currentState == player.rollState)
+            return false;
+
+        return true;
+    }
+
+    private bool CanSlide()
+    {
+        if (player.isWallDetected)
+            return false;
+
+        if (stateMachine.currentState == player.slideState)
+            return false;
+
+        if (stateMachine.currentState != player.moveState)
             return false;
 
         return true;

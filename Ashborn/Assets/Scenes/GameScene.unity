@@ -15407,6 +15407,8 @@ MonoBehaviour:
   rollColliderOffset: {x: -0.006775806, y: -0.2895826}
   ledgeJumpColliderSize: {x: 0.2, y: 0.4}
   ledgeJumpColliderOffset: {x: 0, y: 0}
+  slideColliderSize: {x: 0.3, y: 0.5}
+  slideColliderOffset: {x: 0, y: -0.7}
   ledgeGrabDistance: 0.5
   ledgeClearDistance: 1.09
   ledgeGrabFrontCheck: {fileID: 1551622361}
@@ -15428,6 +15430,8 @@ MonoBehaviour:
   maxAirDashes: 1
   ledgeDropPushBackAmount: 0.5
   ledgeJumpForce: {x: 0, y: 13}
+  slideDuration: 0.5
+  slideSpeed: 12
 --- !u!50 &922195388
 Rigidbody2D:
   serializedVersion: 5

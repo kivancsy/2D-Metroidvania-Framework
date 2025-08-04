@@ -51,12 +51,7 @@ public class PlayerLedgeGrabState : PlayerState
             player.DoLedgeDropPushBack();
             return;
         }
-
-        // if (player.moveInput.x != 0 && player.moveInput.x != player.facingDirection)
-        // {
-        //     stateMachine.ChangeState(player.fallState);
-        //     return;
-        // }
+        
 
         player.SetVelocity(0, 0);
     }

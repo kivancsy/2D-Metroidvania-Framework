@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class PlayerRollState : PlayerGroundedState
 {
-    public float originalGravityScale;
     private int rollDirection;
 
     public PlayerRollState(Player player, StateMachine stateMachine, string animBoolName) : base(player, stateMachine,
