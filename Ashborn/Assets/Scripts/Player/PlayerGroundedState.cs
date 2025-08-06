@@ -24,26 +24,13 @@ public class PlayerGroundedState : PlayerState
         if (input.Player.Jump.WasPerformedThisFrame())
             stateMachine.ChangeState(player.jumpState);
 
-        if (input.Player.Roll.WasPerformedThisFrame() && CanRoll())
-            stateMachine.ChangeState(player.rollState);
-
         if (input.Player.Attack.WasPerformedThisFrame())
             stateMachine.ChangeState(player.basicAttackState);
 
         if (input.Player.Slide.WasPerformedThisFrame() && CanSlide())
             stateMachine.ChangeState(player.slideState);
     }
-
-    private bool CanRoll()
-    {
-        if (player.isWallDetected)
-            return false;
-
-        if (stateMachine.currentState == player.rollState)
-            return false;
-
-        return true;
-    }
+    
 
     private bool CanSlide()
     {
