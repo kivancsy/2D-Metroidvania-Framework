@@ -178,5 +178,3 @@ public class Player : Entity
         }
     }
 }
-//0.673
-//0.875
