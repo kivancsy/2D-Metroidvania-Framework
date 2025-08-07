@@ -21,7 +21,7 @@ public class PlayerGroundedState : PlayerState
         if (rb.linearVelocity.y < 0 && player.isGroundDetected == false)
             stateMachine.ChangeState(player.fallState);
 
-        if (input.Player.Jump.WasPerformedThisFrame())
+        if (input.Player.Jump.WasPerformedThisFrame() && stateMachine.currentState != player.rollState)
             stateMachine.ChangeState(player.jumpState);
 
         if (input.Player.Attack.WasPerformedThisFrame())
@@ -30,7 +30,7 @@ public class PlayerGroundedState : PlayerState
         if (input.Player.Slide.WasPerformedThisFrame() && CanSlide())
             stateMachine.ChangeState(player.slideState);
     }
-    
+
 
     private bool CanSlide()
     {
