@@ -32,6 +32,14 @@ public class Enemy : Entity
         stateMachine.ChangeState(battleState);
     }
 
+    public Transform GetPLayerReferance()
+    {
+        if (player == null)
+            player = PlayerDetected().transform;
+
+        return player;
+    }
+
     public RaycastHit2D PlayerDetected()
     {
         RaycastHit2D hit =

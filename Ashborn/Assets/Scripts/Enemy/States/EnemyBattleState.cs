@@ -13,8 +13,11 @@ public class EnemyBattleState : EnemyState
     public override void Enter()
     {
         base.Enter();
+
+        UpdateBattleTimer();
+
         if (player == null)
-            player = enemy.PlayerDetected().transform;
+            player = enemy.GetPLayerReferance();
 
         if (ShouldRetreat())
         {
