@@ -31,6 +31,8 @@ public class Entity : MonoBehaviour
     private bool isKnocked;
     private Coroutine knockbackCo;
 
+    public float deathAnimationDuration;
+
     protected virtual void Awake()
     {
         anim = GetComponentInChildren<Animator>();
@@ -57,6 +59,10 @@ public class Entity : MonoBehaviour
     public void CurrentStateAnimationTrigger()
     {
         stateMachine.currentState.AnimationTrigger();
+    }
+
+    public virtual void EntityDeath()
+    {
     }
 
     public void ReceiveKnockback(Vector2 knockback, float duration)

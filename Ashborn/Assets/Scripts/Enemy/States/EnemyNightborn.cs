@@ -10,6 +10,7 @@ public class EnemyNightborn : Enemy
         moveState = new EnemyMoveState(this, stateMachine, "isMove");
         attackState = new EnemyAttackState(this, stateMachine, "isAttack");
         battleState = new EnemyBattleState(this, stateMachine, "isBattle");
+        deathState = new EnemyDeathState(this, stateMachine, "isDead");
     }
 
     protected override void Start()

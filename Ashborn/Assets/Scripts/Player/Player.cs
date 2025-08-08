@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 
 public class Player : Entity
 {
+    public static event Action OnPlayerDeath;
     public PlayerInputSet input { get; private set; }
 
     public PlayerIdleState idleState { get; private set; }
@@ -18,6 +19,7 @@ public class Player : Entity
     public PlayerLedgeGrabState ledgeGrabState { get; private set; }
     public PlayerLedgeJumpState ledgeJumpState { get; private set; }
     public PlayerSlideState slideState { get; private set; }
+    public PlayerDeathState deathState { get; private set; }
 
     [Header("Player Specific Collision Detection")]
     public Vector2 rollColliderSize = new Vector2(0.5f, 0.5f);
@@ -74,12 +76,21 @@ public class Player : Entity
         ledgeGrabState = new PlayerLedgeGrabState(this, stateMachine, "isLedgeGrab");
         ledgeJumpState = new PlayerLedgeJumpState(this, stateMachine, "isLedgeJump");
         slideState = new PlayerSlideState(this, stateMachine, "isSlide");
+        deathState = new PlayerDeathState(this, stateMachine, "isDead");
     }
 
     protected override void Start()
     {
         base.Start();
         stateMachine.Initialize(idleState);
+    }
+
+    public override void EntityDeath()
+    {
+        base.EntityDeath();
+
+        OnPlayerDeath?.Invoke();
+        stateMachine.ChangeState(deathState);
     }
 
     protected override void Update()
